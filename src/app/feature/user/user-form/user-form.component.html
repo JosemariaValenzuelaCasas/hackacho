@@ -1,0 +1,41 @@
+<h2>Formulario de Usuario</h2>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div>
+    <label>Username:</label>
+    <input type="text" formControlName="username" />
+    <div *ngIf="form.get('username')?.invalid && form.get('username')?.touched">
+      <small *ngIf="form.get('username')?.errors?.['required']">Este campo es obligatorio.</small>
+      <small *ngIf="form.get('username')?.errors?.['minlength']">Mínimo 6 caracteres.</small>
+    </div>
+  </div>
+
+  <div>
+    <label>Nombre:</label>
+    <input type="text" formControlName="name" />
+    <div *ngIf="form.get('name')?.invalid && form.get('name')?.touched">
+      <small *ngIf="form.get('name')?.errors?.['required']">Este campo es obligatorio.</small>
+    </div>
+  </div>
+
+  <div>
+    <label>Apellido:</label>
+    <input type="text" formControlName="surname" />
+    <div *ngIf="form.get('surname')?.invalid && form.get('surname')?.touched">
+      <small *ngIf="form.get('surname')?.errors?.['required']">Este campo es obligatorio.</small>
+    </div>
+  </div>
+
+  <div>
+    <label>Fecha de nacimiento:</label>
+    <input type="date" formControlName="birthdate" />
+    <div *ngIf="form.get('birthdate')?.invalid && form.get('birthdate')?.touched">
+      <small *ngIf="form.get('birthdate')?.errors?.['required']">Este campo es obligatorio.</small>
+    </div>
+  </div>
+
+  <div>
+    <button type="submit" [disabled]="form.invalid">Guardar</button>
+    <button type="button" (click)="cancel()">Cancelar</button>
+  </div>
+</form>

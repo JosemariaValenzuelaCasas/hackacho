@@ -1,0 +1,43 @@
+<div class="user-list">
+    <h2>Lista de usuarios</h2>
+    <button (click)="addUser()">Nuevo Usuario</button>
+    <div class="filters">
+        <button (click)="loadUsers()">Listar todos</button>
+        <button (click)="findByStatus(true)">Activos</button>
+        <button (click)="findByStatus(false)">Inactivos</button>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Username</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Fecha Nacimiento</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let u of users">
+                <td>{{u.idUser}}</td>
+                <td>{{u.username}}</td>
+                <td>{{u.name}}</td>
+                <td>{{u.surname}}</td>
+                <td>{{u.birthdate}}</td>
+                <td>{{u.status}}</td>
+                <td>
+                    <button (click)="openModal(u)">editar</button>
+                    <button *ngIf="u.status" (click)="delete(u.idUser!)">Eliminar</button>
+                    <button *ngIf="!u.status" (click)="restore(u.idUser!)">Restaurar</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+<app-user-form
+  *ngIf="isModalOpen"
+  [user]="selectedUser"
+  (close)="closeModal()"
+></app-user-form>
+</div>
